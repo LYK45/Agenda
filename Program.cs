@@ -1,58 +1,50 @@
-﻿using Funcoes.Models;
+﻿using System.Text;
+using DesafioProjetoHospedagem.Models;
 
-// Coloca o encoding para UTF8 para exibir acentuação
-Console.OutputEncoding = System.Text.Encoding.UTF8;
+Console.OutputEncoding = Encoding.UTF8;
 
+bool continuarCadastro = true;
 
-string nome = "";
-string sobrenome = "";
-string telefone = "";
-List<Contatos> agenda = new List<Contatos>();
+while (continuarCadastro)
+{
+    // Cria os modelos de hóspedes e cadastra na lista de hóspedes
+    List<Pessoa> hospedes = new List<Pessoa>();
 
-Console.WriteLine("Seja bem vindo à agenda de contatos!\n" + "Digite o que gostaria de fazer:");
+    Console.WriteLine("Quantos hóspedes você deseja cadastrar?");
+    int quantidadeHospedes = int.Parse(Console.ReadLine());
 
-// Criando um objeto Contato
-Contatos contato1 = new Contatos("João", "da Silva", "(11) 91234-5678");
-
-
-// Realiza o loop do menu
-    Console.Clear();
-    Console.WriteLine("Digite a sua opção:");
-    Console.WriteLine("1 - Cadastrar contato");
-    Console.WriteLine("2 - Editar contato");
-    Console.WriteLine("3 - Listar contatos");
-    Console.WriteLine("4 - Encerrar");
-
-    switch (Console.ReadLine())
+    for (int i = 1; i <= quantidadeHospedes; i++)
     {
-        case "1":
-            Console.WriteLine("Por favor insira o primeiro nome do contato:");
-            nome = Console.ReadLine() ?? string.Empty;
-
-            Console.WriteLine("Por favor insira o sobrenome do contato:");
-            sobrenome = Console.ReadLine() ?? string.Empty;
-
-            Console.WriteLine("Por favor insira o sobrenome do contato:");
-            telefone = Console.ReadLine() ?? string.Empty;
-
-            // Criando um objeto Contato
-            Contatos contato2 = new Contatos(nome, sobrenome, telefone);
-            agenda.Add(contato2);
-            break;
-
-        case "2":
-            contato1.Nome = "Maria";
-            Console.WriteLine(contato1.Telefone);
-            break;
-
-        case "3":
-            // Chamando o método
-            contato1.ExibirInformacoes();
-            break;
-
-        default:
-            Console.WriteLine("Opção inválida");
-            break;
+        Console.WriteLine($"Digite o nome do hóspede {i}:");
+        string nomeHospede = Console.ReadLine();
+        Pessoa hospede = new Pessoa(nome: nomeHospede);
+        hospedes.Add(hospede);
     }
 
-Console.WriteLine("O programa se encerrou");
+    // Cria a suíte
+    Console.WriteLine("Digite o tipo da suíte:");
+    string tipoSuite = Console.ReadLine();
+    Console.WriteLine("Digite a capacidade da suíte:");
+    int capacidadeSuite = int.Parse(Console.ReadLine());
+    Console.WriteLine("Digite o valor da diária da suíte:");
+    decimal valorDiariaSuite = decimal.Parse(Console.ReadLine());
+
+    Suite suite = new Suite(tipoSuite: tipoSuite, capacidade: capacidadeSuite, valorDiaria: valorDiariaSuite);
+
+    // Cria uma nova reserva, passando a suíte e os hóspedes
+    Console.WriteLine("Digite a quantidade de dias reservados:");
+    int diasReservados = int.Parse(Console.ReadLine());
+
+    Reserva reserva = new Reserva(diasReservados: diasReservados);
+    reserva.CadastrarSuite(suite);
+    reserva.CadastrarHospedes(hospedes);
+
+    // Exibe a quantidade de hóspedes e o valor da diária
+    Console.WriteLine($"Hóspedes: {reserva.ObterQuantidadeHospedes()}");
+    Console.WriteLine($"Valor diária: {reserva.CalcularValorDiaria()}");
+
+    // Pergunta se deseja fazer um novo cadastro
+    Console.WriteLine("Deseja fazer um novo cadastro? (s/n)");
+    string resposta = Console.ReadLine().ToLower();
+    continuarCadastro = resposta == "s";
+}

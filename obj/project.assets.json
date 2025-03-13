@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\luqui\\Desktop\\contatos\\contatos.csproj",
+      "projectUniqueName": "C:\\Users\\luqui\\Desktop\\contatos_Agenda\\Agenda\\contatos.csproj",
       "projectName": "contatos",
-      "projectPath": "C:\\Users\\luqui\\Desktop\\contatos\\contatos.csproj",
+      "projectPath": "C:\\Users\\luqui\\Desktop\\contatos_Agenda\\Agenda\\contatos.csproj",
       "packagesPath": "C:\\Users\\luqui\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\luqui\\Desktop\\contatos\\obj\\",
+      "outputPath": "C:\\Users\\luqui\\Desktop\\contatos_Agenda\\Agenda\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\luqui\\AppData\\Roaming\\NuGet\\NuGet.Config"
